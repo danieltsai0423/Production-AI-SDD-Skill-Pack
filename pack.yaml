@@ -1,0 +1,27 @@
+name: production-ai-sdd-skill-pack
+version: 1.0.0
+agent_skills_spec: "1"
+minimum_python: "3.11"
+license: MIT
+description: >-
+  Spec-driven workflows, production architecture reviews, AI contracts, evaluations,
+  reliability gates, and human-control patterns for Codex, Claude Code, and Agent
+  Skills-compatible coding agents.
+skills:
+  - pai-sdd-orchestrator
+  - pai-sdd-discovery
+  - pai-sdd-specify
+  - pai-sdd-clarify
+  - pai-sdd-plan
+  - pai-sdd-tasking
+  - pai-sdd-implement
+  - pai-sdd-verify
+  - pai-sdd-change
+  - pai-sdd-close
+  - pai-ai-architecture-review
+  - pai-ai-contracts
+  - pai-reliability-review
+  - pai-security-privacy-review
+  - pai-ai-evaluation
+  - pai-release-readiness
+  - pai-incident-postmortem
