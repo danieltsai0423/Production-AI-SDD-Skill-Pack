@@ -11,7 +11,7 @@ metadata:
 
 # Purpose
 
-Find security and privacy weaknesses — general and AI-specific — before they reach production, treating
+Find security and privacy weaknesses - general and AI-specific - before they reach production, treating
 all external content as untrusted.
 
 # Use this skill when
@@ -28,10 +28,10 @@ all external content as untrusted.
 
 # Must check
 
-Secret handling · authn/authz · least privilege · tenant isolation · PII/sensitive data · data
-minimization · retention/deletion · prompt injection · indirect prompt injection · tool injection ·
-retrieval poisoning · output encoding · SSRF/SQLi/command injection · unsafe file/URL handling ·
-logging leakage · model-provider data-policy assumptions · audit trail · approval boundaries.
+Secret handling, authn/authz, least privilege, tenant isolation, PII/sensitive data, data
+minimization, retention/deletion, prompt injection, indirect prompt injection, tool injection,
+retrieval poisoning, output encoding, SSRF/SQLi/command injection, unsafe file/URL handling,
+logging leakage, model-provider data-policy assumptions, audit trail, approval boundaries.
 
 # Principles
 
@@ -43,8 +43,8 @@ logging leakage · model-provider data-policy assumptions · audit trail · appr
 
 # Prompt-injection threat model
 
-Distinguish direct user injection · indirect content injection · retrieval poisoning · tool-output
-injection · cross-agent instruction contamination. Defenses: content/instruction separation, tool-permission
+Distinguish direct user injection, indirect content injection, retrieval poisoning, tool-output
+injection, cross-agent instruction contamination. Defenses: content/instruction separation, tool-permission
 enforcement, schema validation, source-trust metadata, sandboxing, human approval, audit + anomaly detection.
 
 # Output contract
@@ -69,7 +69,7 @@ enforcement, schema validation, source-trust metadata, sandboxing, human approva
 
 # References
 
-- Pairs with `pai-ai-contracts` (tool + data contracts). Master Spec §10.14, §21.
+- Pairs with `pai-ai-contracts` (tool + data contracts). Master Spec sec. 10.14, sec. 21.
 
 # Completion criteria
 

@@ -1,0 +1,73 @@
+# Trigger eval cases (Master Spec Appendix C scenarios 1-8).
+# Format per Master Spec sec. 16.3. These drive scripts/run_trigger_evals.py.
+#
+# NOTE: run_trigger_evals.py performs STATIC checks only (schema, referential integrity,
+# keyword-overlap smoke). Measuring real trigger precision/recall requires running a live
+# agent against these prompts; that harness is a tracked follow-up.
+
+- id: trigger-001-tiny-edit
+  prompt: "Fix a spelling error in README.md."
+  expected_skills: []
+  must_not_trigger:
+    - pai-sdd-orchestrator
+    - pai-sdd-specify
+    - pai-sdd-plan
+  rationale: "Level 0 formatting edit; must not spin up full SDD ceremony."
+
+- id: trigger-002-low-risk-summary
+  prompt: "Add an internal-only meeting-summary endpoint using the existing model client. It must return structured JSON and must not store transcripts."
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-sdd-specify
+  must_not_trigger: []
+  rationale: "Level 1-2 feature; needs classification and a testable spec with output schema and privacy."
+
+- id: trigger-003-webhook-ai
+  prompt: "Add a webhook that receives customer messages, calls an LLM, and sends a reply through a third-party API."
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-reliability-review
+  must_not_trigger: []
+  rationale: "External async event with outbound side effect; reliability (ack, dedup, retry, ordering) required."
+
+- id: trigger-004-rag-change
+  prompt: "Replace the vector store and change chunking for the production knowledge assistant."
+  expected_skills:
+    - pai-sdd-change
+    - pai-ai-evaluation
+  must_not_trigger: []
+  rationale: "Brownfield RAG change; needs spec delta, RAG contract, and regression eval."
+
+- id: trigger-005-high-risk-agent
+  prompt: "Let the AI approve refunds and update customer records automatically."
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-ai-contracts
+    - pai-security-privacy-review
+  must_not_trigger: []
+  rationale: "Level 3 tool-using financial write; needs tool contract, permissions, human approval, audit, rollback."
+
+- id: trigger-006-requirement-change
+  prompt: "The client now wants the AI to publish generated content automatically instead of requiring review."
+  expected_skills:
+    - pai-sdd-change
+    - pai-release-readiness
+  must_not_trigger: []
+  rationale: "Requirement change that escalates risk and removes a human gate; needs spec delta and release gate."
+
+- id: trigger-007-incident
+  prompt: "Customers received duplicate replies after the provider retried webhook deliveries."
+  expected_skills:
+    - pai-incident-postmortem
+    - pai-reliability-review
+  must_not_trigger: []
+  rationale: "Incident; contain first, root cause beyond 'provider retried', add idempotency/dedup + regression."
+
+- id: trigger-008-concept-question
+  prompt: "Explain what a vector database is."
+  expected_skills: []
+  must_not_trigger:
+    - pai-sdd-orchestrator
+    - pai-sdd-discovery
+    - pai-sdd-specify
+  rationale: "Pure explanation; must not start an SDD workflow or create repository artifacts."

@@ -16,7 +16,7 @@ particular framework, so implementation and verification have a stable contract.
 
 # Use this skill when
 
-- Discovery classified the work as Level 1–3.
+- Discovery classified the work as Level 1-3.
 - The team needs agreed, testable requirements before design.
 
 # Do not use this skill when
@@ -56,16 +56,16 @@ Use `templates/spec.md`. Every requirement is uniquely identified and testable.
 # Blocking conditions
 
 - Critical requirements contradict each other and cannot be resolved from evidence.
-- AI quality cannot be expressed measurably — escalate to `pai-sdd-clarify`.
+- AI quality cannot be expressed measurably - escalate to `pai-sdd-clarify`.
 
 # Gotchas
 
 - Do not smuggle a chosen technology into requirements; keep capability vs implementation separate.
-- "The AI should be helpful" is not a requirement — define observable, measurable behavior.
+- "The AI should be helpful" is not a requirement - define observable, measurable behavior.
 
 # References
 
-- Use `templates/spec.md`. For unresolved ambiguity, hand to `pai-sdd-clarify`. Master Spec §10.3, §12.
+- Use `templates/spec.md`. For unresolved ambiguity, hand to `pai-sdd-clarify`. Master Spec sec. 10.3, sec. 12.
 
 # Completion criteria
 

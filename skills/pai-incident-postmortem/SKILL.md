@@ -11,7 +11,7 @@ metadata:
 
 # Purpose
 
-Convert an incident into lasting improvement — not a symptom patch — with a blameless root cause and
+Convert an incident into lasting improvement - not a symptom patch - with a blameless root cause and
 corrective actions that prevent, detect, or recover.
 
 # Use this skill when
@@ -45,9 +45,9 @@ corrective actions that prevent, detect, or recover.
 
 # Output contract (postmortem)
 
-Incident summary · timeline · customer/business impact · detection · containment · root cause ·
-contributing factors · what worked/failed · corrective actions · regression tests · monitoring updates ·
-spec/runbook updates · owners and deadlines.
+Incident summary, timeline, customer/business impact, detection, containment, root cause,
+contributing factors, what worked/failed, corrective actions, regression tests, monitoring updates,
+spec/runbook updates, owners and deadlines.
 
 # Blocking conditions
 
@@ -55,12 +55,12 @@ spec/runbook updates · owners and deadlines.
 
 # Gotchas
 
-- "The provider retried the webhook" is a trigger, not a root cause — fix idempotency/dedup.
+- "The provider retried the webhook" is a trigger, not a root cause - fix idempotency/dedup.
 - A postmortem with no regression test invites the same incident again.
 
 # References
 
-- Feeds `pai-sdd-change` for the durable fix and `pai-ai-evaluation` for regression coverage. Master Spec §9.3, §10.17.
+- Feeds `pai-sdd-change` for the durable fix and `pai-ai-evaluation` for regression coverage. Master Spec sec. 9.3, sec. 10.17.
 
 # Completion criteria
 

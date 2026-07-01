@@ -28,9 +28,9 @@ failures, and no reliance on brittle single-prompt or single-fallback designs.
 
 # Review dimensions
 
-User/business flow · system boundaries · model boundary · orchestration boundary · tool boundary ·
-data & state ownership · sync/async split · failure isolation · scalability · portability · vendor
-lock-in · cost · latency · observability · testability.
+User/business flow, system boundaries, model boundary, orchestration boundary, tool boundary,
+data & state ownership, sync/async split, failure isolation, scalability, portability, vendor
+lock-in, cost, latency, observability, testability.
 
 # Anti-patterns to flag
 
@@ -63,11 +63,16 @@ lock-in · cost · latency · observability · testability.
 # Gotchas
 
 - Reviewers must read the plan/diff independently, not inherit the implementer's conclusions.
-- Not every low-latency endpoint needs a queue — flag the anti-pattern, not the pattern's absence.
+- Not every low-latency endpoint needs a queue - flag the anti-pattern, not the pattern's absence.
+
+# Boundary with related skills
+
+- This skill judges structure (boundaries, ownership, isolation, lock-in). Hand event/queue/retry/
+  idempotency/recovery depth to `pai-reliability-review`, and formal interface terms to `pai-ai-contracts`.
 
 # References
 
-- Pairs with `pai-reliability-review` and `pai-ai-contracts`. Master Spec §10.11, §19.
+- Pairs with `pai-reliability-review` and `pai-ai-contracts`. Master Spec sec. 10.11, sec. 19.
 
 # Completion criteria
 

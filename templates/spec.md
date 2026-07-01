@@ -34,25 +34,25 @@ related_decisions: []
 
 # Functional requirements
 
-- **FR-001** — <what/why, testable>
+- **FR-001** - <what/why, testable>
 
 # Non-functional requirements
 
-- **NFR-001** — <latency, throughput, availability, cost...>
+- **NFR-001** - <latency, throughput, availability, cost...>
 
 # AI behavior requirements
 
-- **AI-001** — <answerable scope, uncertainty behavior, tool boundaries, human takeover>
+- **AI-001** - <answerable scope, uncertainty behavior, tool boundaries, human takeover>
 
 # Data
 
-- **DATA-001** — <classification, ownership, retention, redaction>
+- **DATA-001** - <classification, ownership, retention, redaction>
 
 # Failure scenarios
 
 # Acceptance criteria (Given / When / Then)
 
-- **AC-001** — Given <context>, When <event>, Then <observable, measurable outcome>
+- **AC-001** - Given <context>, When <event>, Then <observable, measurable outcome>
 
 # Success metrics
 

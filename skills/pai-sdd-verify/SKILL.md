@@ -15,7 +15,7 @@ Prove spec compliance with reproducible evidence and issue a PASS / CONDITIONAL 
 
 # Use this skill when
 
-- Before declaring Level 1–3 work complete, or before a release gate.
+- Before declaring Level 1-3 work complete, or before a release gate.
 
 # Do not use this skill when
 
@@ -27,7 +27,7 @@ Prove spec compliance with reproducible evidence and issue a PASS / CONDITIONAL 
 
 # Workflow (verification layers)
 
-- [ ] 1. Requirements traceability (each requirement → evidence).
+- [ ] 1. Requirements traceability (each requirement -> evidence).
 - [ ] 2. Static validation.
 - [ ] 3. Unit tests.
 - [ ] 4. Integration tests.
@@ -74,9 +74,14 @@ Prove spec compliance with reproducible evidence and issue a PASS / CONDITIONAL 
 - "No tests" is not "no problems found".
 - One happy path is not full verification; an LLM-as-judge is not the sole quality evidence.
 
+# Boundary with related skills
+
+- This skill proves the change meets its spec. `pai-release-readiness` does not re-verify; it makes a
+  deploy go/no-go decision using this skill's Verification Report plus operational readiness.
+
 # References
 
-- Feed the result into `pai-release-readiness` / `pai-sdd-close`. Master Spec §10.8, §20.
+- Feed the result into `pai-release-readiness` / `pai-sdd-close`. Master Spec sec. 10.8, sec. 20.
 
 # Completion criteria
 

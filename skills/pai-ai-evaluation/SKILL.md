@@ -28,9 +28,9 @@ compared across prompt/model/retrieval/tool changes.
 
 # Evaluation dimensions
 
-Task success · correctness · groundedness · relevance · completeness · refusal accuracy · escalation
-accuracy · tool selection · tool-argument correctness · schema compliance · hallucination rate ·
-safety · latency · cost · retrieval quality · user experience.
+Task success, correctness, groundedness, relevance, completeness, refusal accuracy, escalation
+accuracy, tool selection, tool-argument correctness, schema compliance, hallucination rate,
+safety, latency, cost, retrieval quality, user experience.
 
 # Eval hierarchy (prefer the strongest applicable)
 
@@ -65,12 +65,12 @@ An eval suite (cases + thresholds) plus a results report per dimension, includin
 
 # Gotchas
 
-- An average score can hide catastrophic failures — keep and review the failing examples.
+- An average score can hide catastrophic failures - keep and review the failing examples.
 - LLM-as-judge without calibration is not evidence.
 
 # References
 
-- Feeds `pai-sdd-verify` and `pai-release-readiness`. Master Spec §10.15, §16, §20.
+- Feeds `pai-sdd-verify` and `pai-release-readiness`. Master Spec sec. 10.15, sec. 16, sec. 20.
 
 # Completion criteria
 

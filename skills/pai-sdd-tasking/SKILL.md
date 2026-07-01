@@ -1,6 +1,6 @@
 ---
 name: pai-sdd-tasking
-description: Breaks an approved plan into small tasks that are independently implementable, verifiable, and reversible, each with explicit path boundaries, linked requirements, verification, and rollback impact. Use after pai-sdd-plan for Level 1-3 work. Do not use before a plan exists or for a single Level 0 edit.
+description: Breaks approved work into small tasks that are independently implementable, verifiable, and reversible, each with explicit path boundaries, linked requirements, verification, and rollback impact. Use after pai-sdd-plan for Level 2-3 work, or directly after a light Level 1 spec that needs no separate plan. Do not use before a plan or Level 1 spec exists, or for a single Level 0 edit.
 license: MIT
 compatibility: Works with Agent Skills-compatible coding agents. Optional adapters support Codex and Claude Code.
 metadata:
@@ -20,7 +20,12 @@ acceptance evidence, and can be rolled back independently.
 
 # Do not use this skill when
 
-- No plan/spec exists yet, or the change is a single Level 0 edit.
+- No plan (Level 2-3) or light spec (Level 1) exists yet, or the change is a single Level 0 edit.
+
+## Level 1 vs Level 2-3
+
+At Level 1 there is no `plan.md`; derive tasks directly from the light `spec.md`. At Level 2-3, derive
+tasks from `plan.md` and its contracts. Either way, do not invent a heavy plan just to run this skill.
 
 # Required inputs
 
@@ -61,7 +66,7 @@ Use `templates/tasks.md`. Each task validates against the task shape above.
 
 # Blocking conditions
 
-- A task cannot be bounded or verified independently — return to `pai-sdd-plan`.
+- A task cannot be bounded or verified independently - return to `pai-sdd-plan`.
 
 # Gotchas
 
@@ -70,7 +75,7 @@ Use `templates/tasks.md`. Each task validates against the task shape above.
 
 # References
 
-- Use `templates/tasks.md`; hand tasks to `pai-sdd-implement` one at a time. Master Spec §10.6.
+- Use `templates/tasks.md`; hand tasks to `pai-sdd-implement` one at a time. Master Spec sec. 10.6.
 
 # Completion criteria
 

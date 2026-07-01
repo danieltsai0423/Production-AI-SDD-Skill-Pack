@@ -11,8 +11,8 @@ metadata:
 
 # Purpose
 
-Drive an AI engineering task through the minimum sufficient SDD workflow — discovery, specify,
-clarify, plan, tasking, implement, verify, close — selecting domain reviews by risk. It prevents
+Drive an AI engineering task through the minimum sufficient SDD workflow - discovery, specify,
+clarify, plan, tasking, implement, verify, close - selecting domain reviews by risk. It prevents
 the two common failures: skipping specification on risky work, and burying trivial edits in ceremony.
 
 # Use this skill when
@@ -37,10 +37,10 @@ If inputs are missing, inspect the repository before asking the user. Record saf
 
 Progress:
 
-- [ ] 1. Run discovery (`pai-sdd-discovery`) to classify work type and Level 0–3.
+- [ ] 1. Run discovery (`pai-sdd-discovery`) to classify work type and Level 0-3.
 - [ ] 2. Derive required artifacts from the Level.
 - [ ] 3. Check for an active spec/change; continue it instead of starting a new one.
-- [ ] 4. Run specify → clarify → plan → tasking in order, skipping steps the Level does not require.
+- [ ] 4. Run specify -> clarify -> plan -> tasking in order, skipping steps the Level does not require.
 - [ ] 5. During plan, select domain reviews (architecture, contracts, reliability, security-privacy, evaluation).
 - [ ] 6. During implement, restrict each iteration to a single task boundary.
 - [ ] 7. During verify, collect reproducible evidence.
@@ -49,8 +49,8 @@ Progress:
 ## Step routing by Level
 
 - Level 0: skip specify/plan; go straight to a bounded implement + targeted verify.
-- Level 1: specify (light) → tasking → implement → verify.
-- Level 2: full specify → clarify → plan (+ selected reviews) → tasking → implement → verify → close.
+- Level 1: specify (light) -> tasking -> implement -> verify.
+- Level 2: full specify -> clarify -> plan (+ selected reviews) -> tasking -> implement -> verify -> close.
 - Level 3: Level 2 plus mandatory risk assessment, AI behavior + human-oversight + security-privacy
   contracts, evals, observability, and rollback before implementation is approved.
 
@@ -63,14 +63,14 @@ Progress:
 
 # Gotchas
 
-- Do not classify from the prompt alone — inspect the repository (a "simple" endpoint that triggers
+- Do not classify from the prompt alone - inspect the repository (a "simple" endpoint that triggers
   a payment is still Level 3).
 - Do not re-run discovery from scratch if an active spec/change already covers this work.
 
 # References
 
 - Use `pai-sdd-discovery` first; hand off to the specific lifecycle skill for each phase.
-- The Master Spec §5 (methodology), §9 (lifecycle), §10 (catalog) define the authoritative flow.
+- The Master Spec sec. 5 (methodology), sec. 9 (lifecycle), sec. 10 (catalog) define the authoritative flow.
 
 # Completion criteria
 

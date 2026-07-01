@@ -40,11 +40,11 @@ handling, security/privacy, observability, tests, migration, deployment, rollbac
 
 Call the ones the change touches:
 
-- `pai-ai-architecture-review` — new/changed component boundaries or data/state ownership.
-- `pai-ai-contracts` — model/prompt/RAG/tool/data/human-oversight behavior.
-- `pai-reliability-review` — events, queues, background jobs, external dependencies.
-- `pai-security-privacy-review` — sensitive data, auth, tenancy, untrusted content.
-- `pai-ai-evaluation` — any non-deterministic AI behavior.
+- `pai-ai-architecture-review` - new/changed component boundaries or data/state ownership.
+- `pai-ai-contracts` - model/prompt/RAG/tool/data/human-oversight behavior.
+- `pai-reliability-review` - events, queues, background jobs, external dependencies.
+- `pai-security-privacy-review` - sensitive data, auth, tenancy, untrusted content.
+- `pai-ai-evaluation` - any non-deterministic AI behavior.
 
 ## Rules
 
@@ -70,7 +70,7 @@ decision records under `decisions/`.
 
 # References
 
-- Use `templates/plan.md`; invoke the domain-review skills above. Master Spec §10.5, §13, §19.
+- Use `templates/plan.md`; invoke the domain-review skills above. Master Spec sec. 10.5, sec. 13, sec. 19.
 
 # Completion criteria
 

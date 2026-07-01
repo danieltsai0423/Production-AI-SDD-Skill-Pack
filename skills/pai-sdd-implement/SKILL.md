@@ -33,14 +33,14 @@ task boundary and leaving reproducible evidence.
 - [ ] 3. Find or create a failing test / verification case.
 - [ ] 4. Implement the minimum change.
 - [ ] 5. Run targeted tests.
-- [ ] 6. Check the boundary — revert any unrelated changes.
+- [ ] 6. Check the boundary - revert any unrelated changes.
 - [ ] 7. Self-review, then update the task's implementation notes.
 - [ ] 8. Have an independent reviewer or fresh context verify before moving on.
 
 ## Rules
 
-- Deterministic behavior: RED → GREEN → REFACTOR.
-- AI quality: combine fixed datasets, rubric, threshold, and failure analysis — not unit tests alone.
+- Deterministic behavior: RED -> GREEN -> REFACTOR.
+- AI quality: combine fixed datasets, rubric, threshold, and failure analysis - not unit tests alone.
 
 # Must avoid
 
@@ -62,7 +62,7 @@ task boundary and leaving reproducible evidence.
 
 # References
 
-- Hand off to `pai-sdd-verify` for evidence collection. Master Spec §10.7, §5.3.
+- Hand off to `pai-sdd-verify` for evidence collection. Master Spec sec. 10.7, sec. 5.3.
 
 # Completion criteria
 

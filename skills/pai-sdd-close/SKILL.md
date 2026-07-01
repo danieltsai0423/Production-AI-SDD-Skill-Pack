@@ -50,11 +50,11 @@ and tracked follow-ups.
 # Gotchas
 
 - Closing without recording known limitations pushes hidden risk to operations.
-- Follow-ups left only in chat are lost — file them as tracked items.
+- Follow-ups left only in chat are lost - file them as tracked items.
 
 # References
 
-- Master Spec §10.10, §25 (Definition of Done).
+- Master Spec sec. 10.10, sec. 25 (Definition of Done).
 
 # Completion criteria
 

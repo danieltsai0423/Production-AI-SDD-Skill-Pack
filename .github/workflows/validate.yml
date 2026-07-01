@@ -1,0 +1,32 @@
+name: validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Validate skills (format + references)
+        run: python scripts/validate_skills.py
+
+      - name: Validate specs
+        run: python scripts/validate_specs.py
+
+      - name: Trigger eval suite (static checks)
+        run: python scripts/run_trigger_evals.py
+
+      - name: Secret scan
+        run: python scripts/scan_secrets.py
+
+      - name: Installer dry-run (codex + claude)
+        run: python scripts/install.py --targets codex claude --scope repo --dry-run

@@ -27,13 +27,13 @@ Make a defensible go/no-go release decision across every readiness category, not
 
 # Gate categories
 
-Requirements/scope · code quality · tests · AI evals · data/migration · security/privacy · reliability ·
-observability · cost/capacity · rollback · human operation · documentation · approval.
+Requirements/scope, code quality, tests, AI evals, data/migration, security/privacy, reliability,
+observability, cost/capacity, rollback, human operation, documentation, approval.
 
 # Release result
 
 - `PASS`
-- `CONDITIONAL_PASS` — must name an owner, deadline, and mitigation for each open item.
+- `CONDITIONAL_PASS` - must name an owner, deadline, and mitigation for each open item.
 - `FAIL`
 
 # Prohibited
@@ -63,7 +63,7 @@ observability · cost/capacity · rollback · human operation · documentation �
 
 # References
 
-- Consumes `pai-sdd-verify` and `pai-ai-evaluation` output. Master Spec §10.16, §22, §24.
+- Consumes `pai-sdd-verify` and `pai-ai-evaluation` output. Master Spec sec. 10.16, sec. 22, sec. 24.
 
 # Completion criteria
 

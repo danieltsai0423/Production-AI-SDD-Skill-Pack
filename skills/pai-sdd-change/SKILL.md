@@ -11,7 +11,7 @@ metadata:
 
 # Purpose
 
-Handle changes to an existing system as a bounded delta — not a full rewrite — with explicit
+Handle changes to an existing system as a bounded delta - not a full rewrite - with explicit
 compatibility, migration, and rollback analysis, then reconcile it into the canonical spec.
 
 # Use this skill when
@@ -39,13 +39,13 @@ compatibility, migration, and rollback analysis, then reconcile it into the cano
 
 ```text
 changes/<change-id>/
-├── proposal.md
-├── impact.md
-├── spec-delta.md
-├── design.md
-├── tasks.md
-├── verification.md
-└── decisions/
++-- proposal.md
++-- impact.md
++-- spec-delta.md
++-- design.md
++-- tasks.md
++-- verification.md
+\-- decisions/
 ```
 
 # Output contract
@@ -59,12 +59,12 @@ Use `templates/change-proposal.md` and `templates/spec-delta.md`; produce the ch
 
 # Gotchas
 
-- Do not just delete the old behavior (e.g. removing a review UI) — analyze impact and risk escalation first.
+- Do not just delete the old behavior (e.g. removing a review UI) - analyze impact and risk escalation first.
 - Prompt/model/RAG changes are behavior changes even when code is untouched; run regression evals.
 
 # References
 
-- Use `pai-ai-evaluation` for regression, `pai-release-readiness` before rollout. Master Spec §9.2, §10.9, §20.3.
+- Use `pai-ai-evaluation` for regression, `pai-release-readiness` before rollout. Master Spec sec. 9.2, sec. 10.9, sec. 20.3.
 
 # Completion criteria
 

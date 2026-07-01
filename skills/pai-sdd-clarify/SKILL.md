@@ -11,7 +11,7 @@ metadata:
 
 # Purpose
 
-Remove the specific ambiguities that change architecture, risk, or acceptance — before design starts —
+Remove the specific ambiguities that change architecture, risk, or acceptance - before design starts -
 and persist the resulting decisions so they are not lost in conversation.
 
 # Use this skill when
@@ -38,7 +38,7 @@ and persist the resulting decisions so they are not lost in conversation.
 ## Resolution strategy
 
 Prefer evidence over asking. Ask the user only when a critical, high-risk ambiguity cannot be resolved
-from available evidence. Never leave a resolved answer only in chat — write it into the spec.
+from available evidence. Never leave a resolved answer only in chat - write it into the spec.
 
 # Output contract
 
@@ -56,7 +56,7 @@ affected requirements, date, and revisit condition.
 
 # References
 
-- Use `templates/clarifications.md`. Feed decisions back into `spec.md`. Master Spec §10.4.
+- Use `templates/clarifications.md`. Feed decisions back into `spec.md`. Master Spec sec. 10.4.
 
 # Completion criteria
 

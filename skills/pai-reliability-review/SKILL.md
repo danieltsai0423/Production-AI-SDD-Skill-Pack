@@ -28,16 +28,16 @@ failure without duplicate side effects or lost work.
 
 # Must check
 
-Acknowledgement deadline · idempotency key · event deduplication · message ordering · concurrency
-control · user/entity lock · retry eligibility · exponential backoff + jitter · max retry count ·
-dead-letter handling · timeout · circuit breaker · partial failure · poison message · replay ·
-data consistency · recovery point/time · fallback and manual operation.
+Acknowledgement deadline, idempotency key, event deduplication, message ordering, concurrency
+control, user/entity lock, retry eligibility, exponential backoff + jitter, max retry count,
+dead-letter handling, timeout, circuit breaker, partial failure, poison message, replay,
+data consistency, recovery point/time, fallback and manual operation.
 
 # Webhook reference pattern
 
 ```text
-Receive → Authenticate/verify signature → Normalize → Persist event/deduplicate → Enqueue →
-Acknowledge → Process asynchronously → Persist result → Perform outbound action → Record audit/metrics
+Receive -> Authenticate/verify signature -> Normalize -> Persist event/deduplicate -> Enqueue ->
+Acknowledge -> Process asynchronously -> Persist result -> Perform outbound action -> Record audit/metrics
 ```
 
 This is a default reference, not a mandate: do not force a queue onto every low-latency endpoint with
@@ -60,12 +60,12 @@ no external deadline or dependency.
 
 # Gotchas
 
-- "The provider won't retry" is an assumption, not a guarantee — design for at-least-once delivery.
+- "The provider won't retry" is an assumption, not a guarantee - design for at-least-once delivery.
 - Concurrency for the same user/entity needs a lock, not just a stateless handler.
 
 # References
 
-- Pairs with `pai-ai-architecture-review`. Master Spec §10.13, §2.
+- Pairs with `pai-ai-architecture-review`. Master Spec sec. 10.13, sec. 2.
 
 # Completion criteria
 

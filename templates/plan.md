@@ -1,6 +1,6 @@
 ---
 id: FEAT-000
-title: <feature title> — Implementation Plan
+title: <feature title> - Implementation Plan
 spec: spec.md
 status: draft
 updated_at: 2026-07-01
@@ -19,7 +19,7 @@ updated_at: 2026-07-01
 - API / event contracts:
 - State model:
 - Persistence:
-- (Detailed contracts live in `contracts/` — AI behavior, model/prompt, data, RAG, tool, human-oversight.)
+- (Detailed contracts live in `contracts/` - AI behavior, model/prompt, data, RAG, tool, human-oversight.)
 
 # Failure strategy
 
@@ -50,4 +50,4 @@ updated_at: 2026-07-01
 
 # Decision records
 
-- **ADR-00X** — <decision> · alternatives: <...> · consequences: <...>
+- **ADR-00X** - <decision>, alternatives: <...>, consequences: <...>

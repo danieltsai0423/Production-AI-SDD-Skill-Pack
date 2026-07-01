@@ -1,6 +1,6 @@
 ---
 id: FEAT-000
-title: <feature title> — Tasks
+title: <feature title> - Tasks
 plan: plan.md
 updated_at: 2026-07-01
 ---

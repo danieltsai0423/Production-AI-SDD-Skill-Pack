@@ -12,7 +12,7 @@ metadata:
 # Purpose
 
 Decide what kind of work this is, how risky it is, what evidence already exists, and the minimum
-workflow needed — before editing code. It prevents both over-engineering trivial edits and
+workflow needed - before editing code. It prevents both over-engineering trivial edits and
 under-specifying dangerous ones.
 
 # Use this skill when
@@ -37,7 +37,7 @@ Inspect the repository before asking the user. Never classify from the prompt al
 - [ ] 1. Read root instructions and any active specs/changes/ADRs.
 - [ ] 2. Identify code ownership, related modules, tests, and deployment.
 - [ ] 3. Determine work type: greenfield / brownfield / incident / research spike.
-- [ ] 4. Determine Level 0–3 using the risk table.
+- [ ] 4. Determine Level 0-3 using the risk table.
 - [ ] 5. List assumptions, unknowns, dependencies, and affected interfaces.
 - [ ] 6. Emit the Discovery Report.
 
@@ -83,11 +83,11 @@ Inspect the repository before asking the user. Never classify from the prompt al
 # Gotchas
 
 - A simple new API that executes a payment is still Level 3.
-- A prompt-only change may not touch code yet still change production behavior — do not mark it Level 0.
+- A prompt-only change may not touch code yet still change production behavior - do not mark it Level 0.
 
 # References
 
-- Master Spec §5.2 (risk levels), §10.2. Hand back to `pai-sdd-orchestrator` with the chosen Level.
+- Master Spec sec. 5.2 (risk levels), sec. 10.2. Hand back to `pai-sdd-orchestrator` with the chosen Level.
 
 # Completion criteria
 

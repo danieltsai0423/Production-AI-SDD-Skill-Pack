@@ -1,5 +1,6 @@
 name: production-ai-sdd-skill-pack
-version: 1.0.0
+version: 0.1.0
+maturity: core-skill-pack-with-initial-enforcement   # not yet the Master Spec's production-grade v1.0
 agent_skills_spec: "1"
 minimum_python: "3.11"
 license: MIT
@@ -7,6 +8,18 @@ description: >-
   Spec-driven workflows, production architecture reviews, AI contracts, evaluations,
   reliability gates, and human-control patterns for Codex, Claude Code, and Agent
   Skills-compatible coding agents.
+repository: https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack
+homepage: https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack
+supported_agents:
+  - codex
+  - claude-code
+install:
+  strategy: copy
+  script: scripts/install.py
+  manifest: .pai-sdd-install-manifest.json
+  targets:
+    codex: .agents/skills
+    claude: .claude/skills
 skills:
   - pai-sdd-orchestrator
   - pai-sdd-discovery

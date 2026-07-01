@@ -28,12 +28,12 @@ guarantees, tool permissions and side effects, and human-oversight triggers as v
 
 # Contract types
 
-- **A. AI Behavior** — allowed/disallowed behavior, uncertainty & refusal & escalation behavior, tone/format, external-communication boundary.
-- **B. Model & Prompt** — capability requirement vs implementation choice, prompt version, parameters, context budget, structured-output schema, fallback, cost/latency budget.
-- **C. Data** — input/output schema, ownership, classification, retention, redaction, quality assumptions, validation.
-- **D. RAG** — source authority, indexing, metadata, retrieval method, citation requirement, no-result behavior, freshness, evaluation.
-- **E. Tool** — purpose, input/output schema, permission, preconditions, idempotency, timeout, retry, compensation/rollback, audit event, read/write/destructive classification.
-- **F. Human Oversight** — trigger, owner, pause/resume behavior, approval SLA, conflict prevention, audit trail.
+- **A. AI Behavior** - allowed/disallowed behavior, uncertainty & refusal & escalation behavior, tone/format, external-communication boundary.
+- **B. Model & Prompt** - capability requirement vs implementation choice, prompt version, parameters, context budget, structured-output schema, fallback, cost/latency budget.
+- **C. Data** - input/output schema, ownership, classification, retention, redaction, quality assumptions, validation.
+- **D. RAG** - source authority, indexing, metadata, retrieval method, citation requirement, no-result behavior, freshness, evaluation.
+- **E. Tool** - purpose, input/output schema, permission, preconditions, idempotency, timeout, retry, compensation/rollback, audit event, read/write/destructive classification.
+- **F. Human Oversight** - trigger, owner, pause/resume behavior, approval SLA, conflict prevention, audit trail.
 
 # Output contract
 
@@ -51,12 +51,12 @@ One file per applicable contract under `specs/<feature-id>/contracts/`, using th
 
 # Gotchas
 
-- Natural-language prompt rules are not a contract — schema, permissions, and audit must be explicit.
+- Natural-language prompt rules are not a contract - schema, permissions, and audit must be explicit.
 - Uncertainty and refusal behavior are contract terms, not afterthoughts.
 
 # References
 
-- Pairs with `pai-security-privacy-review` and `pai-ai-evaluation`. Master Spec §10.12, §13.
+- Pairs with `pai-security-privacy-review` and `pai-ai-evaluation`. Master Spec sec. 10.12, sec. 13.
 
 # Completion criteria
 
