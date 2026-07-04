@@ -17,6 +17,7 @@ Thumbs.db
 # Generated adapter copies (canonical source is skills/)
 .agents/skills/
 .claude/skills/
+.pai-sdd-install-manifest.json
 
 # Temp / working
 workbench/

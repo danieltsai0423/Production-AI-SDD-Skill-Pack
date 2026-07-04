@@ -6,6 +6,7 @@
 # agent against these prompts; that harness is a tracked follow-up.
 
 - id: trigger-001-tiny-edit
+  category: negative
   prompt: "Fix a spelling error in README.md."
   expected_skills: []
   must_not_trigger:
@@ -15,6 +16,7 @@
   rationale: "Level 0 formatting edit; must not spin up full SDD ceremony."
 
 - id: trigger-002-low-risk-summary
+  category: positive
   prompt: "Add an internal-only meeting-summary endpoint using the existing model client. It must return structured JSON and must not store transcripts."
   expected_skills:
     - pai-sdd-discovery
@@ -23,6 +25,7 @@
   rationale: "Level 1-2 feature; needs classification and a testable spec with output schema and privacy."
 
 - id: trigger-003-webhook-ai
+  category: positive
   prompt: "Add a webhook that receives customer messages, calls an LLM, and sends a reply through a third-party API."
   expected_skills:
     - pai-sdd-discovery
@@ -31,6 +34,7 @@
   rationale: "External async event with outbound side effect; reliability (ack, dedup, retry, ordering) required."
 
 - id: trigger-004-rag-change
+  category: positive
   prompt: "Replace the vector store and change chunking for the production knowledge assistant."
   expected_skills:
     - pai-sdd-change
@@ -39,6 +43,7 @@
   rationale: "Brownfield RAG change; needs spec delta, RAG contract, and regression eval."
 
 - id: trigger-005-high-risk-agent
+  category: positive
   prompt: "Let the AI approve refunds and update customer records automatically."
   expected_skills:
     - pai-sdd-discovery
@@ -48,6 +53,7 @@
   rationale: "Level 3 tool-using financial write; needs tool contract, permissions, human approval, audit, rollback."
 
 - id: trigger-006-requirement-change
+  category: positive
   prompt: "The client now wants the AI to publish generated content automatically instead of requiring review."
   expected_skills:
     - pai-sdd-change
@@ -56,6 +62,7 @@
   rationale: "Requirement change that escalates risk and removes a human gate; needs spec delta and release gate."
 
 - id: trigger-007-incident
+  category: positive
   prompt: "Customers received duplicate replies after the provider retried webhook deliveries."
   expected_skills:
     - pai-incident-postmortem
@@ -64,6 +71,7 @@
   rationale: "Incident; contain first, root cause beyond 'provider retried', add idempotency/dedup + regression."
 
 - id: trigger-008-concept-question
+  category: negative
   prompt: "Explain what a vector database is."
   expected_skills: []
   must_not_trigger:
@@ -71,3 +79,26 @@
     - pai-sdd-discovery
     - pai-sdd-specify
   rationale: "Pure explanation; must not start an SDD workflow or create repository artifacts."
+
+- id: trigger-009-ambiguous-ai-quality
+  category: ambiguous
+  prompt: "Improve the AI assistant's answers because users say some replies are wrong or stale, but we do not know whether the cause is prompt, retrieval, model, or data freshness."
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-sdd-clarify
+    - pai-ai-evaluation
+  must_not_trigger:
+    - pai-sdd-implement
+  rationale: "Ambiguous AI quality request; must classify scope, clarify root cause and acceptance criteria, and define evals before implementation."
+
+- id: trigger-010-ambiguous-automation-permissions
+  category: ambiguous
+  prompt: "Make the AI handle account changes automatically when it thinks the request is safe."
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-sdd-clarify
+    - pai-ai-contracts
+    - pai-security-privacy-review
+  must_not_trigger:
+    - pai-sdd-implement
+  rationale: "Ambiguous real-effect automation; must resolve permission boundaries, approvals, auditability, and risk before implementation."

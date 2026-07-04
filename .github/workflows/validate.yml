@@ -25,6 +25,9 @@ jobs:
       - name: Trigger eval suite (static checks)
         run: python scripts/run_trigger_evals.py
 
+      - name: Workflow eval suite (static checks)
+        run: python scripts/run_workflow_evals.py
+
       - name: Secret scan
         run: python scripts/scan_secrets.py
 

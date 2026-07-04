@@ -76,6 +76,7 @@ and records an install manifest.
 python scripts/validate_skills.py     # format, references, duplicate names, hardcoded paths, non-ASCII
 python scripts/validate_specs.py      # feature specs under specs/ (no-op until specs exist)
 python scripts/run_trigger_evals.py   # trigger-eval cases: schema + referential + keyword smoke (static)
+python scripts/run_workflow_evals.py  # workflow cases: routing + artifact + gate contract smoke (static)
 python scripts/scan_secrets.py        # gitleaks/detect-secrets if present, else stdlib fallback
 ```
 
@@ -97,8 +98,8 @@ Observability = evidence problems are discoverable, traceable, recoverable
 ## Status
 
 **Present in this release:** 17 core skills, SDD + contract templates, a copy-based installer
-(`scripts/install.py`), an extended skill validator, a spec validator, a secret scanner, a trigger-eval
-scaffold (Appendix C scenarios), and a CI workflow.
+(`scripts/install.py`), an extended skill validator, a spec validator, a secret scanner, static
+trigger/workflow eval scaffolds, and a CI workflow.
 
 **Not yet implemented (tracked follow-ups):** Codex/Claude hooks, a full output/workflow eval suite with
 live-agent scoring and precision/recall thresholds, JSON schemas, repository fixtures, `profiles/` and

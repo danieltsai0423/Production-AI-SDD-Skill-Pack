@@ -1,0 +1,98 @@
+# Static workflow-compliance eval cases.
+# These cases do not run a live agent. They validate the pack's routing contract, required
+# artifacts, and gate terms for realistic prompts that a live-agent harness should later execute.
+
+- id: workflow-001-level3-support-webhook-agent
+  category: positive
+  prompt: "Build a customer-support AI webhook that receives third-party message events, retrieves account context, drafts replies with an LLM, sends approved replies, and can update ticket tags in the CRM."
+  expected_work_type: greenfield
+  expected_level: 3
+  expected_skills:
+    - pai-sdd-orchestrator
+    - pai-sdd-discovery
+    - pai-sdd-specify
+    - pai-sdd-clarify
+    - pai-sdd-plan
+    - pai-ai-contracts
+    - pai-reliability-review
+    - pai-security-privacy-review
+    - pai-ai-evaluation
+    - pai-sdd-tasking
+    - pai-sdd-verify
+    - pai-release-readiness
+  must_not_trigger: []
+  required_artifacts:
+    - brief.md
+    - clarifications.md
+    - spec.md
+    - plan.md
+    - tasks.md
+    - verification.md
+    - contracts/ai-behavior-contract.md
+    - contracts/model-prompt-contract.md
+    - contracts/data-contract.md
+    - contracts/tool-contract.md
+    - contracts/human-oversight-contract.md
+    - contracts/reliability-contract.md
+    - contracts/evaluation-contract.md
+    - contracts/observability-contract.md
+  required_gate_terms:
+    - human
+    - rollback
+    - evaluation
+    - audit
+    - idempotency
+    - retry
+    - ordering
+    - privacy
+    - prompt injection
+  rationale: "External AI communication plus real-effect CRM writes requires Level 3 contracts, reliability, security/privacy, evals, human oversight, rollback, and release readiness."
+
+- id: workflow-002-negative-concept-question
+  category: negative
+  prompt: "Explain what a vector database is and when it is useful."
+  expected_work_type: research
+  expected_level: 0
+  expected_skills: []
+  must_not_trigger:
+    - pai-sdd-orchestrator
+    - pai-sdd-discovery
+    - pai-sdd-specify
+    - pai-sdd-plan
+    - pai-sdd-implement
+  required_artifacts: []
+  required_gate_terms: []
+  rationale: "Pure explanation should not create specs, tasks, implementation work, or release gates."
+
+- id: workflow-003-ambiguous-ai-quality-regression
+  category: ambiguous
+  prompt: "The production knowledge assistant is giving wrong and stale answers. Improve it, but we do not know whether the issue is prompt wording, model version, retrieval, source data, or evaluation coverage."
+  expected_work_type: brownfield
+  expected_level: 2
+  expected_skills:
+    - pai-sdd-discovery
+    - pai-sdd-clarify
+    - pai-sdd-plan
+    - pai-ai-contracts
+    - pai-ai-evaluation
+    - pai-sdd-verify
+  must_not_trigger:
+    - pai-sdd-implement
+  required_artifacts:
+    - clarifications.md
+    - spec.md
+    - plan.md
+    - verification.md
+    - contracts/model-prompt-contract.md
+    - contracts/data-contract.md
+    - contracts/rag-contract.md
+    - contracts/evaluation-contract.md
+  required_gate_terms:
+    - unknown
+    - acceptance
+    - evaluation
+    - regression
+    - retrieval
+    - model
+    - prompt
+  rationale: "Ambiguous brownfield AI quality issue should clarify cause and define regression evals before implementation."

@@ -55,13 +55,14 @@ python scripts/install.py --targets claude --scope user --dry-run
 python scripts/validate_skills.py     # 格式、參照、重複名稱、硬編路徑、非 ASCII
 python scripts/validate_specs.py      # specs/ 下的規格（尚無規格時為 no-op）
 python scripts/run_trigger_evals.py   # 觸發案例：schema + 參照 + 關鍵字 smoke（靜態）
+python scripts/run_workflow_evals.py  # workflow 案例：routing + artifact + gate contract smoke（靜態）
 python scripts/scan_secrets.py        # 有 gitleaks/detect-secrets 則優先使用，否則採 stdlib fallback
 ```
 
 ## 狀態
 
 **本次已包含：** 17 個核心 skills、SDD 與契約模板、複製式安裝器、擴充後的 skill validator、
-spec validator、secret 掃描、觸發評估骨架（Appendix C 場景）與 CI。
+spec validator、secret 掃描、靜態 trigger/workflow 評估骨架與 CI。
 
 **尚未實作（追蹤中）：** Codex/Claude hooks、含 live-agent 評分與 precision/recall 門檻的完整
 output/workflow 評估、JSON schemas、fixtures、各 AI 系統類型的 `profiles/` 與 `references/`、

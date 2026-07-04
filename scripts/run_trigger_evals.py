@@ -7,7 +7,8 @@ its expected skills. Real precision/recall requires executing an agent against t
 is a tracked follow-up.
 
 Checks (fail -> exit 1):
-  - Each case has id, prompt, expected_skills (list), must_not_trigger (list), rationale.
+  - Each case has id, category, prompt, expected_skills (list), must_not_trigger (list), rationale.
+  - Categories cover positive, negative, and ambiguous trigger behavior.
   - Case ids are unique.
   - Every named skill (expected or must_not) exists under skills/.
   - No skill appears in both expected_skills and must_not_trigger of the same case.
@@ -24,6 +25,8 @@ import re
 from pathlib import Path
 
 STOP = set("a an the to and or of for with in on at is it be by an as this that add new use using make".split())
+CATEGORIES = {"positive", "negative", "ambiguous"}
+REQUIRED_CATEGORIES = {"positive", "negative", "ambiguous"}
 
 
 def load_cases(path: Path) -> list[dict]:
@@ -103,12 +106,19 @@ def main() -> int:
 
     errors: list[str] = []
     seen_ids: set[str] = set()
+    seen_categories: set[str] = set()
 
     for i, case in enumerate(cases):
         cid = case.get("id") or f"<index {i}>"
-        for field in ("id", "prompt", "rationale"):
+        for field in ("id", "category", "prompt", "rationale"):
             if not case.get(field):
                 errors.append(f"{cid}: missing '{field}'")
+        category = case.get("category")
+        if category:
+            if category not in CATEGORIES:
+                errors.append(f"{cid}: unknown category '{category}'")
+            else:
+                seen_categories.add(category)
         for field in ("expected_skills", "must_not_trigger"):
             if not isinstance(case.get(field), list):
                 errors.append(f"{cid}: '{field}' must be a list")
@@ -133,13 +143,19 @@ def main() -> int:
                 flag = "ok" if shared else "weak"
                 print(f"  smoke[{flag}] {cid} -> {name}: shared={sorted(shared)[:6]}")
 
+    missing_categories = REQUIRED_CATEGORIES - seen_categories
+    if missing_categories:
+        errors.append(f"missing trigger case categories: {sorted(missing_categories)}")
+
     print()
     if errors:
         print(f"FAIL: {len(errors)} issue(s) across {len(cases)} case(s):")
         for e in errors:
             print(f"  - {e}")
         return 1
+    counts = {c: sum(1 for case in cases if case.get("category") == c) for c in sorted(CATEGORIES)}
     print(f"PASS: {len(cases)} trigger case(s) well-formed and consistent (static checks only).")
+    print("Categories: " + ", ".join(f"{k}={v}" for k, v in counts.items()))
     return 0
 
 
