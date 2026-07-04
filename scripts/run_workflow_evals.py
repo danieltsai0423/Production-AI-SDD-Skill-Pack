@@ -24,6 +24,13 @@ import argparse
 import re
 from pathlib import Path
 
+try:  # schemas/ drives the structural contract; degrade gracefully if unavailable.
+    from _minijsonschema import validate as schema_validate, load_schema
+    EVAL_SCHEMA = load_schema("eval-case")
+except Exception:  # pragma: no cover
+    schema_validate = None
+    EVAL_SCHEMA = None
+
 CATEGORIES = {"positive", "negative", "ambiguous"}
 REQUIRED_CATEGORIES = {"positive", "negative", "ambiguous"}
 KNOWN_WORK = {"greenfield", "brownfield", "incident", "research"}
@@ -138,6 +145,10 @@ def main() -> int:
         if cid in seen_ids:
             errors.append(f"{cid}: duplicate case id")
         seen_ids.add(cid)
+
+        if EVAL_SCHEMA is not None:
+            for err in schema_validate(case, EVAL_SCHEMA):
+                errors.append(f"{cid}: schema: {err}")
 
         category = case.get("category")
         if category:

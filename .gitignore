@@ -23,3 +23,6 @@ Thumbs.db
 workbench/
 *.tmp
 ~$*
+
+# Build output
+dist/

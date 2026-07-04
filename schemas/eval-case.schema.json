@@ -1,0 +1,25 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack/schemas/eval-case.schema.json",
+  "title": "Skill eval case",
+  "description": "A trigger, workflow, output, or safety eval case. Trigger/workflow variants share this shape.",
+  "type": "object",
+  "required": ["id", "prompt"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {"type": "string", "pattern": "^[a-z0-9-]+$"},
+    "prompt": {"type": "string", "minLength": 5},
+    "category": {"type": "string", "enum": ["positive", "negative", "ambiguous", "competing", "explicit"]},
+    "expected_skills": {"type": "array", "items": {"type": "string", "pattern": "^pai-[a-z0-9-]+$"}},
+    "must_not_trigger": {"type": "array", "items": {"type": "string", "pattern": "^pai-[a-z0-9-]+$"}},
+    "expected_level": {
+      "anyOf": [
+        {"type": "integer", "minimum": 0, "maximum": 3},
+        {"type": "string", "pattern": "^[0-3]$"}
+      ]
+    },
+    "expected_artifacts": {"type": "array", "items": {"type": "string"}},
+    "expected_gates": {"type": "array", "items": {"type": "string"}},
+    "rationale": {"type": "string"}
+  }
+}

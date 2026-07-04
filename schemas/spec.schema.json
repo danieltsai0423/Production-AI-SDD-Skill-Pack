@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack/schemas/spec.schema.json",
+  "title": "Feature spec frontmatter",
+  "description": "Frontmatter contract for specs/<feature-id>/spec.md.",
+  "type": "object",
+  "required": ["id", "title", "status", "spec_level", "work_type"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {"type": "string", "pattern": "^FEAT-[0-9]{3,}$"},
+    "title": {"type": "string", "minLength": 3},
+    "status": {"type": "string", "enum": ["draft", "approved", "implemented", "closed"]},
+    "spec_level": {"type": "integer", "minimum": 0, "maximum": 3},
+    "work_type": {"type": "string", "enum": ["greenfield", "brownfield", "incident", "research"]},
+    "owners": {
+      "type": "object",
+      "additionalProperties": {"type": ["string", "null"]}
+    },
+    "risk_domains": {"type": "array", "items": {"type": "string"}},
+    "data_classification": {
+      "type": "string",
+      "enum": ["public", "internal", "confidential", "restricted"]
+    },
+    "human_approval_required": {"type": "boolean"},
+    "created_at": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "updated_at": {"type": "string", "pattern": "^[0-9]{4}-[0-9]{2}-[0-9]{2}$"},
+    "related_changes": {"type": "array", "items": {"type": "string"}},
+    "related_decisions": {"type": "array", "items": {"type": "string"}}
+  },
+  "allOf": [
+    {
+      "if": {"properties": {"spec_level": {"const": 3}}},
+      "then": {
+        "required": ["human_approval_required", "data_classification"],
+        "properties": {"human_approval_required": {"const": true}}
+      }
+    }
+  ]
+}

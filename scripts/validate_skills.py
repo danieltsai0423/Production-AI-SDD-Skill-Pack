@@ -26,6 +26,13 @@ import re
 import sys
 from pathlib import Path
 
+try:  # schemas/skill-manifest.schema.json is the frontmatter contract.
+    from _minijsonschema import validate as schema_validate, load_schema
+    SKILL_SCHEMA = load_schema("skill-manifest")
+except Exception:  # pragma: no cover
+    schema_validate = None
+    SKILL_SCHEMA = None
+
 REQUIRED_FIELDS = ("name", "description", "license", "compatibility")
 NAME_RE = re.compile(r"^[a-z0-9]+(-[a-z0-9]+)*$")
 MAX_LINES = 500
@@ -55,6 +62,35 @@ def parse_frontmatter(text: str) -> dict[str, str] | None:
         elif current_key and line.startswith((" ", "\t")):
             data[current_key] = (data[current_key] + " " + line.strip()).strip()
     return data
+
+
+def parse_frontmatter_nested(text: str) -> dict | None:
+    """Parse frontmatter into a nested dict (one level of indentation) for schema checks."""
+    if not text.startswith("---"):
+        return None
+    end = text.find("\n---", 3)
+    if end == -1:
+        return None
+    root: dict = {}
+    cur_map: dict | None = None
+    for line in text[3:end].splitlines():
+        if not line.strip() or line.lstrip().startswith("#"):
+            continue
+        indent = len(line) - len(line.lstrip())
+        m = re.match(r"^([A-Za-z0-9_]+):\s?(.*)$", line.strip())
+        if not m:
+            continue
+        key, val = m.group(1), m.group(2).strip().strip('"')
+        if indent == 0:
+            if val == "":
+                cur_map = {}
+                root[key] = cur_map
+            else:
+                root[key] = val
+                cur_map = None
+        elif cur_map is not None:
+            cur_map[key] = val
+    return root
 
 
 def load_pack_skills(pack_path: Path) -> list[str]:
@@ -128,6 +164,11 @@ def validate(skills_dir: Path, pack_path: Path, root: Path) -> tuple[list[str], 
         if fm is None:
             errors.append(f"{dir_name}: SKILL.md has no parseable frontmatter")
             continue
+
+        if SKILL_SCHEMA is not None:
+            nested = parse_frontmatter_nested(text) or {}
+            for err in schema_validate(nested, SKILL_SCHEMA):
+                errors.append(f"{dir_name}: schema: {err}")
 
         for field in REQUIRED_FIELDS:
             if not fm.get(field):

@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack/schemas/verification.schema.json",
+  "title": "Verification result (machine-readable)",
+  "description": "Machine-readable companion to verification.md, emitted by run_quality_gate.py.",
+  "type": "object",
+  "required": ["change", "decision", "requirement_evidence"],
+  "additionalProperties": true,
+  "properties": {
+    "change": {"type": "string"},
+    "spec_version": {"type": "string"},
+    "commit": {"type": "string"},
+    "decision": {"type": "string", "enum": ["PASS", "CONDITIONAL_PASS", "FAIL"]},
+    "requirement_evidence": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["requirement", "result"],
+        "properties": {
+          "requirement": {"type": "string"},
+          "evidence": {"type": "string"},
+          "result": {"type": "string", "enum": ["pass", "fail", "partial", "not-covered"]}
+        }
+      }
+    },
+    "commands": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "command": {"type": "string"},
+          "result": {"type": "string"},
+          "evidence": {"type": "string"}
+        }
+      }
+    },
+    "ai_eval_results": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "metric": {"type": "string"},
+          "threshold": {"type": "number"},
+          "actual": {"type": "number"},
+          "result": {"type": "string", "enum": ["pass", "fail"]}
+        }
+      }
+    },
+    "limitations": {"type": "array", "items": {"type": "string"}}
+  }
+}

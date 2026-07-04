@@ -1,0 +1,30 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack/schemas/task.schema.json",
+  "title": "Task item",
+  "description": "One task in specs/<feature-id>/tasks.md (YAML list item).",
+  "type": "object",
+  "required": ["id", "title", "boundary", "requirements", "verification", "rollback_impact", "status"],
+  "additionalProperties": true,
+  "properties": {
+    "id": {"type": "string", "pattern": "^TASK-[0-9]{3,}$"},
+    "title": {"type": "string", "minLength": 3},
+    "depends_on": {"type": "array", "items": {"type": "string", "pattern": "^TASK-[0-9]{3,}$"}},
+    "boundary": {
+      "type": "object",
+      "required": ["allowed_paths"],
+      "properties": {
+        "allowed_paths": {"type": "array", "items": {"type": "string"}},
+        "prohibited_paths": {"type": "array", "items": {"type": "string"}}
+      }
+    },
+    "requirements": {
+      "type": "array",
+      "items": {"type": "string", "pattern": "^(BUS|USR|FR|NFR|AI|DATA|SEC|PRIV|REL|OBS|OPS|EVAL|AC)-[0-9]{3,}$"}
+    },
+    "verification": {"type": "array", "items": {"type": "string"}},
+    "human_approval": {"type": "boolean"},
+    "rollback_impact": {"type": "string", "enum": ["low", "medium", "high"]},
+    "status": {"type": "string", "enum": ["pending", "in_progress", "done"]}
+  }
+}
