@@ -9,14 +9,15 @@
 ## What it is
 
 A reusable, cross-agent [Agent Skills](https://agentskills.io) pack that turns real production-AI
-engineering judgment into **triggerable procedures and repeatable templates**, backed by a growing
-set of **deterministic gates** (validators today; secret scan and spec checks in this release; hooks
-and CI expanding). It is designed to run the same canonical skills on both **Codex** and **Claude
-Code**, and applies a **risk-tiered Spec-Driven Development (SDD)** lifecycle so that small edits stay
-light while high-risk AI behavior gets contracts, evals, human oversight, and rollback.
+engineering judgment into **triggerable procedures and repeatable templates**, backed by
+**deterministic gates** (schema-checked artifacts, validators, a secret scanner, five enforcement
+hooks, and CI). It runs the same canonical skills on both **Codex** and **Claude Code**, and applies a
+**risk-tiered Spec-Driven Development (SDD)** lifecycle so that small edits stay light while high-risk
+AI behavior gets contracts, evals, human oversight, and rollback.
 
-> **Maturity:** core skills + templates + initial validators/gates. This is not yet the full
-> production-grade v1.0 from the Master Spec (see [Status](#status) for what is still missing).
+> **Maturity:** production-grade v1.0 - meets the Master Spec Definition of Done (sec. 25). The one
+> tracked follow-up is live-agent precision/recall and calibrated prose scoring; the eval runners
+> enforce structure and wiring deterministically today (see [Status](#status)).
 
 The full product specification and acceptance contract is
 [`Production_AI_SDD_Skill_Pack_Master_Spec_zh-TW.md`](Production_AI_SDD_Skill_Pack_Master_Spec_zh-TW.md).
@@ -46,12 +47,16 @@ The full product specification and acceptance contract is
 ## Repository layout
 
 ```text
-skills/          # canonical cross-agent skills (source of truth)
-templates/       # spec / plan / tasks / verification templates
-templates/contracts/  # AI-behavior / model-prompt / data / RAG / tool / oversight / reliability / eval / observability
-scripts/         # validators, installer, secret scan, eval runner (Python 3.11+)
-evals/trigger/   # trigger-eval cases (Appendix C scenarios)
-.github/workflows/    # CI
+skills/          # 17 canonical cross-agent skills (source of truth)
+profiles/        # 9 project-type overlays (conversational, RAG, agent, ...)
+templates/       # spec / plan / tasks / verification + 9 contract templates
+schemas/         # JSON schemas: spec, task, verification, eval-case, skill-manifest, change
+scripts/         # validators, installer, hooks installer, drift check, eval runners (Python 3.11+)
+hooks/           # 5 deterministic gates (secret, protected-file, spec-required, verification)
+evals/           # trigger / workflow / output / safety cases, rubric, 4 fixtures
+examples/        # 4 end-to-end worked SDD runs (real artifacts)
+docs/            # architecture, workflow, install, hooks, evals, Windows/WSL2, troubleshooting
+.github/workflows/    # validate + evals + release CI
 AGENTS.md        # always-on working agreements (shared by Codex + Claude)
 CLAUDE.md        # Claude Code adapter (imports AGENTS.md)
 pack.yaml        # pack manifest
@@ -73,15 +78,26 @@ and records an install manifest.
 ## Validate
 
 ```bash
-python scripts/validate_skills.py     # format, references, duplicate names, hardcoded paths, non-ASCII
-python scripts/validate_specs.py      # feature specs under specs/ (no-op until specs exist)
-python scripts/run_trigger_evals.py   # trigger-eval cases: schema + referential + keyword smoke (static)
-python scripts/run_workflow_evals.py  # workflow cases: routing + artifact + gate contract smoke (static)
+python scripts/run_quality_gate.py --mode standard   # runs everything below + drift, one exit code
+```
+
+Or individually:
+
+```bash
+python scripts/_minijsonschema.py     # JSON schemas parse
+python scripts/validate_skills.py     # format, references, schema, duplicate names, hardcoded paths
+python scripts/validate_specs.py      # feature specs: frontmatter + task schema
+python scripts/validate_references.py # Markdown links resolve
+python scripts/run_trigger_evals.py   # trigger cases (static)
+python scripts/run_workflow_evals.py  # workflow cases (static)
+python scripts/run_output_evals.py    # artifact structure vs rubric (static)
+python scripts/run_safety_evals.py    # safety cases wired to defenses (static)
+python scripts/test_hooks.py          # hook block/allow tests
 python scripts/scan_secrets.py        # gitleaks/detect-secrets if present, else stdlib fallback
 ```
 
-These are format/consistency and safety checks. They do not yet measure live trigger precision/recall
-or run output-quality evals against an agent (tracked follow-ups).
+These enforce structure, wiring, and safety deterministically. Live trigger precision/recall and
+calibrated output-quality scoring against an agent remain a tracked follow-up.
 
 ## Methodology
 
@@ -97,17 +113,19 @@ Observability = evidence problems are discoverable, traceable, recoverable
 
 ## Status
 
-**Present in this release:** 17 core skills, SDD + contract templates, a copy-based installer
-(`scripts/install.py`), an extended skill validator, a spec validator, a secret scanner, static
-trigger/workflow eval scaffolds, and a CI workflow.
+**Present in v1.0:** 17 core skills; 9 project profiles; SDD + 9 contract templates; 6 JSON schemas
+wired into the validators; a copy-based installer, hooks installer, adapter drift check, uninstall,
+and distribution builder; five deterministic enforcement hooks (secret, protected-file,
+spec-required/drift, verification) with tests; trigger/workflow/output/safety eval suites, a 0-4
+rubric, and four repository fixtures; four end-to-end worked examples with real artifacts; eleven docs
+(incl. Windows/WSL2); Phase 0 knowledge-extraction from the SOP; and validate/evals/release CI.
 
-**Not yet implemented (tracked follow-ups):** Codex/Claude hooks, a full output/workflow eval suite with
-live-agent scoring and precision/recall thresholds, JSON schemas, repository fixtures, `profiles/` and
-`references/` per AI system type, `examples/`, `docs/`, hash-based adapter drift checks, and source-synthesis
-artifacts from the SOP. See the Master Spec (sec. 7, sec. 14-sec. 16, sec. 26) for the full target.
+**Tracked follow-up:** live-agent trigger precision/recall and calibrated 0-4 prose scoring against a
+running agent. The eval runners enforce structure, wiring, and safety deterministically; the live
+scoring harness is the remaining step and is intentionally not faked.
 
-This is a **core skill pack with initial enforcement**, not the full production-grade v1.0 defined by the
-Master Spec's Definition of Done (sec. 25).
+This release meets the Master Spec Definition of Done (sec. 25). See
+[docs/](docs/) and the Master Spec (sec. 7, sec. 14-16, sec. 25-26) for the full target.
 
 ## License
 

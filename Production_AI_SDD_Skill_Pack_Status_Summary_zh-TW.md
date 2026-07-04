@@ -1,5 +1,9 @@
 # Production AI SDD Skill Pack 狀態總結
 
+> **已被取代（2026-07-05）：** 本文為 0.1.0 時的快照。專案其後升級為 **1.0.0** 並達到 Master Spec
+> Definition of Done；最新狀態見《Production_AI_SDD_Skill_Pack_v1.0_Completion_Report_zh-TW.md》。
+> 以下內容保留作為歷史紀錄。
+
 檢查日期：2026-07-04
 
 ## 結論

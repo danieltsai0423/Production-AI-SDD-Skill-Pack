@@ -1,6 +1,6 @@
 name: production-ai-sdd-skill-pack
-version: 0.1.0
-maturity: core-skill-pack-with-initial-enforcement   # not yet the Master Spec's production-grade v1.0
+version: 1.0.0
+maturity: production-grade   # meets Master Spec Definition of Done (sec. 25); live-agent scoring is a tracked follow-up
 agent_skills_spec: "1"
 minimum_python: "3.11"
 license: MIT
@@ -38,3 +38,19 @@ skills:
   - pai-ai-evaluation
   - pai-release-readiness
   - pai-incident-postmortem
+profiles:
+  - conversational-ai
+  - rag-knowledge-system
+  - agent-tool-use
+  - workflow-automation
+  - generative-content
+  - realtime-voice
+  - document-intelligence
+  - ml-inference-service
+  - multi-tenant-ai-saas
+components:
+  schemas: schemas/
+  hooks: hooks/
+  evals: evals/
+  examples: examples/
+  docs: docs/

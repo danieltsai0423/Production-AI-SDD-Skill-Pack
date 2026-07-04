@@ -8,13 +8,14 @@ English: [README.md](README.md)
 ## 這是什麼
 
 一套可跨代理重複使用的 [Agent Skills](https://agentskills.io) 技能包，把真實的生產級 AI 工程判斷
-轉換為**可觸發的程序與可重複的模板**，並搭配逐步擴充的**確定性閘門**（目前為多個 validator、
-secret scan 與 spec 檢查；hooks 與 CI 持續擴充）。它設計為讓同一套 canonical skills 同時在
-**Codex** 與 **Claude Code** 上運作，並採用**依風險分級的 Spec-Driven Development（SDD）**生命週期：
-小修改保持輕量，高風險 AI 行為則需契約、評估、人工審查與回滾。
+轉換為**可觸發的程序與可重複的模板**，並搭配**確定性閘門**（schema 驗證的產物、多個 validator、
+secret 掃描、五道 enforcement hooks 與 CI）。同一套 canonical skills 同時在 **Codex** 與
+**Claude Code** 上運作，並採用**依風險分級的 Spec-Driven Development（SDD）**生命週期：小修改保持
+輕量，高風險 AI 行為則需契約、評估、人工審查與回滾。
 
-> **成熟度：** 核心 skills + 模板 + 初步 validator/gates。尚未達到 Master Spec 定義的
-> production-grade v1.0（詳見下方「狀態」）。
+> **成熟度：** production-grade v1.0 —— 已達 Master Spec Definition of Done（sec. 25）。唯一追蹤中的
+> 後續工作是 live-agent 的 precision/recall 與校準式 prose 評分；目前 eval runner 已確定性地驗證
+> 結構與佈線（詳見下方「狀態」）。
 
 完整產品規格與驗收契約：[`Production_AI_SDD_Skill_Pack_Master_Spec_zh-TW.md`](Production_AI_SDD_Skill_Pack_Master_Spec_zh-TW.md)。
 
@@ -52,24 +53,24 @@ python scripts/install.py --targets claude --scope user --dry-run
 ## 驗證
 
 ```bash
-python scripts/validate_skills.py     # 格式、參照、重複名稱、硬編路徑、非 ASCII
-python scripts/validate_specs.py      # specs/ 下的規格（尚無規格時為 no-op）
-python scripts/run_trigger_evals.py   # 觸發案例：schema + 參照 + 關鍵字 smoke（靜態）
-python scripts/run_workflow_evals.py  # workflow 案例：routing + artifact + gate contract smoke（靜態）
-python scripts/scan_secrets.py        # 有 gitleaks/detect-secrets 則優先使用，否則採 stdlib fallback
+python scripts/run_quality_gate.py --mode standard   # 一次跑完以下全部 + drift，單一 exit code
 ```
+
+或個別執行：`validate_skills`、`validate_specs`、`validate_references`、`run_trigger_evals`、
+`run_workflow_evals`、`run_output_evals`、`run_safety_evals`、`test_hooks`、`scan_secrets`。
 
 ## 狀態
 
-**本次已包含：** 17 個核心 skills、SDD 與契約模板、複製式安裝器、擴充後的 skill validator、
-spec validator、secret 掃描、靜態 trigger/workflow 評估骨架與 CI。
+**v1.0 已包含：** 17 個核心 skills、9 個 project profiles、SDD 與 9 份契約模板、6 個接進 validator
+的 JSON schemas、複製式安裝器／hooks 安裝器／adapter drift check／uninstall／distribution builder、
+五道確定性 enforcement hooks（含測試）、trigger/workflow/output/safety 評估套件與 0-4 rubric 與四組
+fixtures、四個實走 examples（真實產物）、十一份 docs（含 Windows/WSL2）、來自 SOP 的 Phase 0
+knowledge-extraction，以及 validate/evals/release CI。
 
-**尚未實作（追蹤中）：** Codex/Claude hooks、含 live-agent 評分與 precision/recall 門檻的完整
-output/workflow 評估、JSON schemas、fixtures、各 AI 系統類型的 `profiles/` 與 `references/`、
-`examples/`、`docs/`、hash 式 adapter drift check，以及來自 SOP 的 source-synthesis 產物。
+**追蹤中的後續工作：** live-agent 的 trigger precision/recall 與校準式 0-4 prose 評分。eval runner
+已確定性地驗證結構、佈線與安全；live 評分 harness 是最後一步，且刻意不佯裝完成。
 
-本專案為**具初步強制力的核心技能包**，尚非 Master Spec Definition of Done（sec. 25）所定義的
-production-grade v1.0。
+本版本已達 Master Spec Definition of Done（sec. 25）。
 
 ## 授權
 
