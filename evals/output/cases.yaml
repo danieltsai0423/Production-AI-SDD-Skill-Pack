@@ -1,0 +1,34 @@
+# Output-quality eval cases (static structural checks; see scripts/run_output_evals.py).
+# Each case points at a produced artifact and asserts required sections, requirement-ID kinds, and
+# absence of hallucination markers. Calibrated 0-4 rubric scoring of generated prose is a live-agent
+# follow-up (see RUBRIC.md).
+
+- id: output-spec-conversational
+  artifact: examples/greenfield-ai-feature/specs/FEAT-001/spec.md
+  required_sections: ["Acceptance criteria", "AI behavior requirements", "Human responsibility"]
+  required_req_kinds: ["FR", "AI", "SEC", "REL", "AC"]
+
+- id: output-spec-rag
+  artifact: examples/brownfield-rag-change/specs/FEAT-010/spec.md
+  required_sections: ["Functional requirements", "Evaluation", "Acceptance criteria"]
+  required_req_kinds: ["FR", "AI", "DATA", "EVAL", "AC"]
+
+- id: output-spec-agent
+  artifact: examples/high-risk-agent-action/specs/FEAT-020/spec.md
+  required_sections: ["Security", "Human oversight", "Acceptance criteria"]
+  required_req_kinds: ["FR", "AI", "SEC", "REL", "OPS", "AC"]
+
+- id: output-spec-reliability
+  artifact: examples/webhook-reliability-fix/specs/FEAT-030/spec.md
+  required_sections: ["Reliability requirements", "Acceptance criteria"]
+  required_req_kinds: ["REL", "OBS", "AC"]
+
+- id: output-plan-conversational
+  artifact: examples/greenfield-ai-feature/specs/FEAT-001/plan.md
+  required_sections: ["Architecture", "Failure strategy", "Rollout & rollback"]
+  required_req_kinds: []
+
+- id: output-verification-agent
+  artifact: examples/high-risk-agent-action/specs/FEAT-020/verification.md
+  required_sections: ["Requirement evidence", "AI eval results", "Final decision"]
+  required_req_kinds: []

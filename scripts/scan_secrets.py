@@ -35,6 +35,8 @@ PATTERNS: list[tuple[str, re.Pattern[str]]] = [
 ]
 # .env files are flagged as content that should never be committed.
 ENV_FILE_RE = re.compile(r"(^|/)\.env(\.|$)")
+# Inline allowlist marker (detect-secrets convention) for deliberate test fixtures / example keys.
+ALLOWLIST_RE = re.compile(r"pragma:\s*allowlist secret", re.IGNORECASE)
 
 
 def run_tool(cmd: list[str]) -> int:
@@ -76,9 +78,13 @@ def fallback_scan(root: Path, staged: bool) -> list[str]:
             text = f.read_text(encoding="utf-8", errors="ignore")
         except OSError:
             continue
+        lines = text.splitlines()
         for name, pat in PATTERNS:
             for m in pat.finditer(text):
                 line_no = text.count("\n", 0, m.start()) + 1
+                line = lines[line_no - 1] if 0 <= line_no - 1 < len(lines) else ""
+                if ALLOWLIST_RE.search(line):
+                    continue  # deliberately allowlisted (test fixture / documented example)
                 hits.append(f"{rel}:{line_no}: possible {name}")
     return hits
 

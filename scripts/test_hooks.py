@@ -45,7 +45,7 @@ def main() -> int:
 
     # Secret guard: blocks a Write introducing an AWS key.
     payload = {"tool_name": "Write", "tool_input": {"file_path": "app/config.py",
-               "content": "AWS_KEY = 'AKIAIOSFODNN7EXAMPLE'"}}
+               "content": "AWS_KEY = 'AKIAIOSFODNN7EXAMPLE'"}}  # pragma: allowlist secret
     rc, out = run_hook("secret_guard.py", payload, "standard")
     check("secret_guard blocks AWS key (standard)", rc == 2, out)
     check("secret_guard block is actionable", "Fix:" in out or "secret manager" in out, out)
@@ -61,7 +61,7 @@ def main() -> int:
     check("secret_guard allows env-var reference", rc == 0, out)
 
     # Secret guard: Bash echoing an Anthropic key is blocked.
-    payload_bash = {"tool_name": "Bash", "tool_input": {"command": "echo sk-ant-abcdef0123456789ABCDEF01"}}
+    payload_bash = {"tool_name": "Bash", "tool_input": {"command": "echo sk-ant-abcdef0123456789ABCDEF01"}}  # pragma: allowlist secret
     rc, out = run_hook("secret_guard.py", payload_bash, "standard")
     check("secret_guard blocks key in Bash command", rc == 2, out)
 

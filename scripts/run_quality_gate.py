@@ -60,6 +60,9 @@ def main() -> int:
         ("validate_references.py", []),
         ("run_trigger_evals.py", []),
         ("run_workflow_evals.py", []),
+        ("run_output_evals.py", []),
+        ("run_safety_evals.py", []),
+        ("test_hooks.py", []),
         ("scan_secrets.py", []),
         ("check_spec_drift.py", ["--mode", drift_mode]),
     ]
