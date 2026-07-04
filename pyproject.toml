@@ -1,0 +1,20 @@
+[project]
+name = "production-ai-sdd-skill-pack"
+version = "1.0.0"
+description = "Risk-tiered Spec-Driven Development skills, enforcement, and evals for production AI systems (Codex + Claude Code)."
+readme = "README.md"
+requires-python = ">=3.11"
+license = { text = "MIT" }
+authors = [{ name = "Daniel" }]
+keywords = ["agent-skills", "spec-driven-development", "codex", "claude-code", "ai-engineering"]
+
+[project.urls]
+Homepage = "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack"
+Repository = "https://github.com/danieltsai0423/Production-AI-SDD-Skill-Pack"
+
+[project.optional-dependencies]
+# The scripts run on the stdlib; these improve spec/frontmatter fidelity and secret scanning.
+dev = ["pyyaml>=6", "jsonschema>=4"]
+
+# The pack is not a Python package to install; scripts are run directly (python scripts/<name>.py).
+# This file provides metadata and optional dev dependencies only.

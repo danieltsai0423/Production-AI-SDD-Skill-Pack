@@ -1,0 +1,32 @@
+name: release
+
+on:
+  push:
+    tags: ["v*"]
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install optional deps
+        run: pip install pyyaml jsonschema
+
+      - name: Quality gate must pass before release
+        run: python scripts/run_quality_gate.py --mode strict
+
+      - name: Build distribution
+        run: python scripts/build_distribution.py
+
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v4
+        with:
+          name: pack-dist
+          path: |
+            dist/*.zip
+            dist/SHA256SUMS

@@ -1,0 +1,38 @@
+name: evals
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install optional deps for full-fidelity parsing
+        run: pip install pyyaml jsonschema
+
+      - name: Output eval suite
+        run: python scripts/run_output_evals.py
+
+      - name: Safety eval suite
+        run: python scripts/run_safety_evals.py
+
+      - name: Validate worked example specs
+        run: |
+          for d in examples/*/; do
+            if [ -d "${d}specs" ]; then
+              echo "== ${d}specs =="
+              python scripts/validate_specs.py --specs-dir "${d}specs"
+            fi
+          done
+
+      - name: Full quality gate
+        run: python scripts/run_quality_gate.py --mode standard
