@@ -47,6 +47,22 @@ def parse_frontmatter(text: str) -> dict[str, str]:
     return data
 
 
+def _jsonify(value):
+    """Normalize YAML-native types (date/datetime) to JSON-compatible strings, recursively.
+
+    PyYAML parses an unquoted `2026-07-04` into a datetime.date, which is not a JSON string and would
+    fail schema type checks. Convert such scalars to their ISO string form.
+    """
+    import datetime
+    if isinstance(value, dict):
+        return {k: _jsonify(v) for k, v in value.items()}
+    if isinstance(value, list):
+        return [_jsonify(v) for v in value]
+    if isinstance(value, (datetime.date, datetime.datetime)):
+        return value.isoformat()
+    return value
+
+
 def parse_frontmatter_typed(text: str) -> dict:
     """Parse frontmatter into a typed nested dict. Prefers PyYAML; falls back to a small parser."""
     if not text.startswith("---"):
@@ -58,7 +74,7 @@ def parse_frontmatter_typed(text: str) -> dict:
     try:
         import yaml  # type: ignore
         data = yaml.safe_load(block)
-        return data if isinstance(data, dict) else {}
+        return _jsonify(data) if isinstance(data, dict) else {}
     except Exception:
         pass
 
@@ -162,7 +178,7 @@ def validate_tasks(fid: str, text: str) -> list[str]:
         return []
     try:
         import yaml  # type: ignore
-        items = yaml.safe_load(m.group(1))
+        items = _jsonify(yaml.safe_load(m.group(1)))
     except Exception:
         return []  # PyYAML absent; deep task validation is best-effort
     if not isinstance(items, list):

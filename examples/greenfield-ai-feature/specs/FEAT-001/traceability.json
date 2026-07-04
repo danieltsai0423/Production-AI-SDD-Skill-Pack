@@ -1,0 +1,116 @@
+{
+  "feature": "FEAT-001",
+  "requirements": [
+    {
+      "requirement": "FR-001",
+      "tasks": [
+        "TASK-002"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "FR-002",
+      "tasks": [
+        "TASK-001"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "FR-003",
+      "tasks": [
+        "TASK-002",
+        "TASK-005"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "FR-004",
+      "tasks": [
+        "TASK-004"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "NFR-001",
+      "tasks": [
+        "TASK-001"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "AI-001",
+      "tasks": [
+        "TASK-001"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "AI-002",
+      "tasks": [
+        "TASK-006"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "DATA-001",
+      "tasks": [],
+      "verification": "pass",
+      "gap": true
+    },
+    {
+      "requirement": "PRIV-001",
+      "tasks": [
+        "TASK-004"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "SEC-001",
+      "tasks": [
+        "TASK-002"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "REL-001",
+      "tasks": [
+        "TASK-003"
+      ],
+      "verification": "pass",
+      "gap": false
+    },
+    {
+      "requirement": "AC-001",
+      "tasks": [
+        "TASK-006"
+      ],
+      "verification": "",
+      "gap": true
+    },
+    {
+      "requirement": "AC-002",
+      "tasks": [
+        "TASK-005"
+      ],
+      "verification": "",
+      "gap": true
+    },
+    {
+      "requirement": "AC-003",
+      "tasks": [
+        "TASK-003"
+      ],
+      "verification": "",
+      "gap": true
+    }
+  ]
+}
