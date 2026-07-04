@@ -25,6 +25,9 @@ jobs:
       - name: Validate specs
         run: python scripts/validate_specs.py
 
+      - name: Validate Markdown references
+        run: python scripts/validate_references.py
+
       - name: Trigger eval suite (static checks)
         run: python scripts/run_trigger_evals.py
 
@@ -34,5 +37,16 @@ jobs:
       - name: Secret scan
         run: python scripts/scan_secrets.py
 
+      - name: Hook tests (secret / protected-file guards)
+        run: python scripts/test_hooks.py
+
+      - name: Output eval suite (static checks)
+        run: python scripts/run_output_evals.py
+
       - name: Installer dry-run (codex + claude)
         run: python scripts/install.py --targets codex claude --scope repo --dry-run
+
+      - name: Adapter sync drift check
+        run: |
+          python scripts/install.py --targets codex claude --scope repo
+          python scripts/sync_skills.py --check --targets codex claude

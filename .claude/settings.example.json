@@ -1,0 +1,30 @@
+{
+  "//": "Example Claude Code hook wiring for the Production AI SDD Skill Pack. Copy to .claude/settings.json (or merge) with scripts/install_hooks.py. Set PAI_SDD_ENFORCEMENT to strict | standard | advisory.",
+  "env": {
+    "PAI_SDD_ENFORCEMENT": "standard"
+  },
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write|Edit|MultiEdit|Bash",
+        "hooks": [
+          {"type": "command", "command": "python hooks/common/secret_guard.py"}
+        ]
+      },
+      {
+        "matcher": "Write|Edit|MultiEdit",
+        "hooks": [
+          {"type": "command", "command": "python hooks/common/protected_file_guard.py"}
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {"type": "command", "command": "python hooks/common/spec_required_gate.py"},
+          {"type": "command", "command": "python hooks/common/verification_gate.py"}
+        ]
+      }
+    ]
+  }
+}

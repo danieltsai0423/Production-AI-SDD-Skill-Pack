@@ -1,0 +1,27 @@
+# Example Codex configuration for the Production AI SDD Skill Pack.
+#
+# Codex discovers skills under .agents/skills/ (installed via scripts/install.py --targets codex).
+# The deterministic guards in hooks/common/ are plain scripts, so they wire into whatever
+# pre-tool / pre-commit mechanism your Codex version exposes. The most portable enforcement path
+# that does not depend on a specific Codex hook API is the git pre-commit hook installed by
+# scripts/install_hooks.py, which runs the same guards as Claude Code's PreToolUse/Stop hooks.
+#
+# Enforcement mode is read from the PAI_SDD_ENFORCEMENT environment variable
+# (strict | standard | advisory); default is standard.
+
+[skills]
+# Canonical skills are copied here by the installer.
+path = ".agents/skills"
+
+[enforcement]
+mode = "standard"            # strict | standard | advisory
+# Guards (run via git pre-commit or your Codex pre-tool integration):
+#   python hooks/common/secret_guard.py --staged
+#   python hooks/common/protected_file_guard.py --staged
+#   python hooks/common/spec_required_gate.py
+#   python hooks/common/verification_gate.py
+
+[commands]
+install_skills = "python scripts/install.py --targets codex --scope repo"
+install_hooks  = "python scripts/install_hooks.py"
+quality_gate   = "python scripts/run_quality_gate.py --mode standard"

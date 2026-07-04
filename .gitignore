@@ -19,6 +19,9 @@ Thumbs.db
 .claude/skills/
 .pai-sdd-install-manifest.json
 
+# Generated hook settings (canonical source is .claude/settings.example.json)
+.claude/settings.json
+
 # Temp / working
 workbench/
 *.tmp
