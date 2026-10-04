@@ -63,7 +63,9 @@ python scripts/run_quality_gate.py --mode standard   # 一次跑完以下全部 
 
 **v1.0 已包含：** 17 個核心 skills、9 個 project profiles、SDD 與 9 份契約模板、6 個接進 validator
 的 JSON schemas、複製式安裝器／hooks 安裝器／adapter drift check／uninstall／distribution builder、
-五道確定性 enforcement hooks（含測試）、trigger/workflow/output/safety 評估套件與 0-4 rubric 與四組
+五道確定性 enforcement hooks（含測試——注意兩邊 enforcement 的**時機**不同：Claude Code 透過
+PreToolUse 在寫入前擋下；Codex 最方便可攜的路徑是 git pre-commit hook，等於是在 commit 時才擋下，
+詳見 [hooks/README.md](hooks/README.md)）、trigger/workflow/output/safety 評估套件與 0-4 rubric 與四組
 fixtures、四個實走 examples（真實產物）、十一份 docs（含 Windows/WSL2）、來自 SOP 的 Phase 0
 knowledge-extraction，以及 validate/evals/release CI。
 

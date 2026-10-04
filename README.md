@@ -116,7 +116,9 @@ Observability = evidence problems are discoverable, traceable, recoverable
 **Present in v1.0:** 17 core skills; 9 project profiles; SDD + 9 contract templates; 6 JSON schemas
 wired into the validators; a copy-based installer, hooks installer, adapter drift check, uninstall,
 and distribution builder; five deterministic enforcement hooks (secret, protected-file,
-spec-required/drift, verification) with tests; trigger/workflow/output/safety eval suites, a 0-4
+spec-required/drift, verification) with tests - note enforcement *timing* differs by agent: Claude
+Code blocks pre-write via PreToolUse, while Codex's most portable path is a git pre-commit hook and
+so blocks at commit time (see [hooks/README.md](hooks/README.md)); trigger/workflow/output/safety eval suites, a 0-4
 rubric, and four repository fixtures; four end-to-end worked examples with real artifacts; eleven docs
 (incl. Windows/WSL2); Phase 0 knowledge-extraction from the SOP; and validate/evals/release CI.
 

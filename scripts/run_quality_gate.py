@@ -27,12 +27,14 @@ from __future__ import annotations
 
 import argparse
 import json
+import re
 import subprocess
 import sys
 from datetime import datetime, timezone
 from pathlib import Path
 
 SCRIPTS = Path(__file__).resolve().parent
+SMOKE_RE = re.compile(r"SMOKE_SUMMARY ok=(\d+) weak=(\d+) total=(\d+) weak_pct=([\d.]+)")
 
 
 def run(name: str, argv: list[str]) -> dict:
@@ -41,8 +43,15 @@ def run(name: str, argv: list[str]) -> dict:
                            capture_output=True, text=True)
     except Exception as e:  # pragma: no cover
         return {"check": name, "exit": 2, "ok": False, "output": str(e)}
-    return {"check": name, "exit": p.returncode, "ok": p.returncode == 0,
-            "output": (p.stdout + p.stderr).strip()}
+    result = {"check": name, "exit": p.returncode, "ok": p.returncode == 0,
+              "output": (p.stdout + p.stderr).strip()}
+    m = SMOKE_RE.search(result["output"])
+    if m:
+        result["trigger_smoke"] = {
+            "ok": int(m.group(1)), "weak": int(m.group(2)),
+            "total": int(m.group(3)), "weak_pct": float(m.group(4)),
+        }
+    return result
 
 
 def main() -> int:
@@ -89,6 +98,10 @@ def main() -> int:
         status = "ok" if r["ok"] else "FAIL"
         tag = " (skipped)" if r.get("skipped") else ""
         print(f"  [{status}] {r['check']}{tag}")
+        if r.get("trigger_smoke"):
+            s = r["trigger_smoke"]
+            print(f"      trigger smoke signal: {s['ok']}/{s['total']} ok, {s['weak_pct']}% weak"
+                  " (static heuristic, not live-agent precision/recall)")
     if failed and args.mode != "advisory":
         print("\nFailures:")
         for r in failed:

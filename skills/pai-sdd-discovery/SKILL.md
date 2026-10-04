@@ -85,6 +85,12 @@ Inspect the repository before asking the user. Never classify from the prompt al
 - A simple new API that executes a payment is still Level 3.
 - A prompt-only change may not touch code yet still change production behavior - do not mark it Level 0.
 
+# Boundary with related skills
+
+- This skill only classifies work type, risk Level, and required artifacts, then hands back to
+  `pai-sdd-orchestrator`; it does not sequence specify/plan/implement/verify itself. Use this skill
+  alone only when the user wants just a risk classification.
+
 # References
 
 - Master Spec sec. 5.2 (risk levels), sec. 10.2. Hand back to `pai-sdd-orchestrator` with the chosen Level.

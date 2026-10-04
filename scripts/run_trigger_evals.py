@@ -114,6 +114,8 @@ def main() -> int:
     errors: list[str] = []
     seen_ids: set[str] = set()
     seen_categories: set[str] = set()
+    smoke_ok = 0
+    smoke_weak = 0
 
     for i, case in enumerate(cases):
         cid = case.get("id") or f"<index {i}>"
@@ -152,21 +154,37 @@ def main() -> int:
             if name in descriptions:
                 shared = pk & keywords(descriptions[name])
                 flag = "ok" if shared else "weak"
+                if flag == "ok":
+                    smoke_ok += 1
+                else:
+                    smoke_weak += 1
                 print(f"  smoke[{flag}] {cid} -> {name}: shared={sorted(shared)[:6]}")
 
     missing_categories = REQUIRED_CATEGORIES - seen_categories
     if missing_categories:
         errors.append(f"missing trigger case categories: {sorted(missing_categories)}")
 
+    smoke_total = smoke_ok + smoke_weak
+    smoke_line = None
+    if smoke_total:
+        weak_pct = round(100 * smoke_weak / smoke_total, 1)
+        smoke_line = f"SMOKE_SUMMARY ok={smoke_ok} weak={smoke_weak} total={smoke_total} weak_pct={weak_pct}"
+
     print()
     if errors:
         print(f"FAIL: {len(errors)} issue(s) across {len(cases)} case(s):")
         for e in errors:
             print(f"  - {e}")
+        if smoke_line:
+            print(smoke_line)
         return 1
     counts = {c: sum(1 for case in cases if case.get("category") == c) for c in sorted(CATEGORIES)}
     print(f"PASS: {len(cases)} trigger case(s) well-formed and consistent (static checks only).")
     print("Categories: " + ", ".join(f"{k}={v}" for k, v in counts.items()))
+    if smoke_line:
+        print(smoke_line)
+        print("Note: smoke signal is a static keyword-overlap heuristic, not live-agent precision/recall"
+              " (tracked follow-up per README Status).")
     return 0
 
 

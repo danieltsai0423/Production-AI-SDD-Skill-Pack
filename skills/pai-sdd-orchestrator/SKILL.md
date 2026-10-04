@@ -67,6 +67,13 @@ Progress:
   a payment is still Level 3).
 - Do not re-run discovery from scratch if an active spec/change already covers this work.
 
+# Boundary with related skills
+
+- This skill sequences the whole lifecycle end-to-end; `pai-sdd-discovery` only produces the Level
+  and Discovery Report for step 1. Invoke discovery alone when the user wants just a risk
+  classification; invoke this skill when they want that classification carried through to
+  specify/plan/implement/verify/close.
+
 # References
 
 - Use `pai-sdd-discovery` first; hand off to the specific lifecycle skill for each phase.

@@ -67,6 +67,12 @@ enforcement, schema validation, source-trust metadata, sandboxing, human approva
 - A convincing prompt-injection payload must not auto-acquire high-privilege tools.
 - "The model provider won't train on this" is an assumption that must be verified, not assumed.
 
+# Boundary with related skills
+
+- This skill finds and ranks security/privacy weaknesses against existing trust boundaries; it does
+  not author the tool/data/human-oversight contract terms themselves - that is `pai-ai-contracts`.
+  Use this skill to attack a contract, not to write one.
+
 # References
 
 - Pairs with `pai-ai-contracts` (tool + data contracts). Master Spec sec. 10.14, sec. 21.

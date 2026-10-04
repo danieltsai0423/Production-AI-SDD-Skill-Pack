@@ -54,6 +54,12 @@ One file per applicable contract under `specs/<feature-id>/contracts/`, using th
 - Natural-language prompt rules are not a contract - schema, permissions, and audit must be explicit.
 - Uncertainty and refusal behavior are contract terms, not afterthoughts.
 
+# Boundary with related skills
+
+- This skill authors the permission, data, and oversight contract terms (what is allowed, under what
+  conditions). `pai-security-privacy-review` does not author contracts; it attacks the system against
+  those terms and flags where a contract is missing, wrong, or bypassable.
+
 # References
 
 - Pairs with `pai-security-privacy-review` and `pai-ai-evaluation`. Master Spec sec. 10.12, sec. 13.

@@ -31,9 +31,14 @@ Every block prints an actionable message (what tripped, and how to fix it).
 ## Wiring
 
 - **Claude Code:** copy `.claude/settings.example.json` to `.claude/settings.json`
-  (or run `python scripts/install_hooks.py`). It wires PreToolUse + Stop.
+  (or run `python scripts/install_hooks.py`). It wires PreToolUse + Stop, so guards A/B block
+  **before** a secret or protected file is written.
 - **git:** `python scripts/install_hooks.py` writes `.git/hooks/pre-commit` (no-clobber).
-- **Codex:** see `.codex/config.example.toml`; the git pre-commit path is the most portable.
+- **Codex:** see `.codex/config.example.toml`. Unless your Codex build exposes a pre-tool hook, the
+  git pre-commit path is the most portable - guards A/B then block **at commit time**, after the
+  agent has already written the file to disk. The outcome is equivalent (nothing protected reaches
+  a commit) but the timing is not: do not assume Codex catches a secret the instant it's written the
+  way Claude Code's PreToolUse hook does.
 
 ## Tests
 
